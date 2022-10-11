@@ -6,7 +6,7 @@ use std::{fs, sync::Arc};
 
 pub const ALPN_QUIC_HTTP: &[&[u8]] = &[b"hq-29"];
 pub struct Server<'a> {
-    pub server_config: &'a ServerConfig,
+    server_config: &'a ServerConfig,
 }
 
 impl<'a> Server<'a> {

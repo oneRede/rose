@@ -1,11 +1,8 @@
 use serde_derive::Deserialize;
 
-use std::{
-    io::prelude::*,
-    fs::File,
-};
+use std::{fs::File, io::prelude::*};
 
-const CONFIG_PATH: &str = "/Users/redeone/Git/rose/config.toml";
+const CONFIG_PATH: &str = "/Users/redeone/Git/rose/Config.toml";
 
 #[derive(Deserialize, Debug)]
 pub struct EncryptInfo {
@@ -17,6 +14,7 @@ pub struct EncryptInfo {
 pub struct Config {
     pub encrypt_info: EncryptInfo,
     pub sever_config: ServerConfig,
+    pub client_config: ClientConfig,
 }
 
 #[derive(Deserialize, Debug)]
@@ -26,6 +24,15 @@ pub struct ServerConfig {
     pub cert: String,
     pub stateless_retry: bool,
     pub listen: String,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct ClientConfig {
+    pub key_log: bool,
+    pub host: String,
+    pub port: u32,
+    pub cert: String,
+    pub rebind: bool,
 }
 
 impl Config {
@@ -45,10 +52,14 @@ impl Config {
     }
 
     pub fn get_encrypt_info(&self) -> &EncryptInfo {
-        return &self.encrypt_info
+        return &self.encrypt_info;
     }
 
     pub fn get_server_config(&self) -> &ServerConfig {
-        return &self.sever_config
+        return &self.sever_config;
+    }
+
+    pub fn get_client_config(&self) -> &ClientConfig {
+        return &self.client_config
     }
 }

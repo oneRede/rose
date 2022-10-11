@@ -1,6 +1,7 @@
 mod config;
 mod encrypt;
 mod server;
+mod client;
 
 use crate::config::Config;
 use crate::encrypt::{decrypt, encrypt};
