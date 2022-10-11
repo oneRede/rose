@@ -1,13 +1,14 @@
 mod config;
 mod encrypt;
 
-use crate::config::EncryptInfo;
+use crate::config::Config;
 use crate::encrypt::{decrypt, encrypt};
 
 fn main() {
     let message = "Hello World!";
-
-    let encrypt_info = EncryptInfo::new();
+    
+    let config = Config::new();
+    let encrypt_info = config.get_encrypt_info();
     let key: [u8; 32] = encrypt_info.key;
     let iv: [u8; 16] = encrypt_info.iv;
 

@@ -1,8 +1,11 @@
 use serde_derive::Deserialize;
-use std::fs::File;
-use std::io::prelude::*;
 
-const CONFIG_PATH: &str = "/home/rede/rede/rose/config.toml";
+use std::{
+    io::prelude::*,
+    fs::File,
+};
+
+const CONFIG_PATH: &str = "/Users/redeone/Git/rose/config.toml";
 
 #[derive(Deserialize, Debug)]
 pub struct EncryptInfo {
@@ -11,11 +14,22 @@ pub struct EncryptInfo {
 }
 
 #[derive(Deserialize, Debug)]
-struct Config {
-    encrypt_info: EncryptInfo,
+pub struct Config {
+    pub encrypt_info: EncryptInfo,
+    pub sever_config: ServerConfig,
 }
 
-impl EncryptInfo {
+#[derive(Deserialize, Debug)]
+pub struct ServerConfig {
+    pub key_log: bool,
+    pub root: String,
+    pub key: String,
+    pub cert: String,
+    pub stateless_retry: bool,
+    pub listen: String,
+}
+
+impl Config {
     pub fn new() -> Self {
         let mut file = match File::open(CONFIG_PATH) {
             Ok(f) => f,
@@ -28,6 +42,14 @@ impl EncryptInfo {
             Err(e) => panic!("Error Reading file: {}", e),
         };
         let config: Config = toml::from_str(&str_val).unwrap();
-        config.encrypt_info
+        config
+    }
+
+    pub fn get_encrypt_info(&self) -> &EncryptInfo {
+        return &self.encrypt_info
+    }
+
+    pub fn get_server_config(&self) -> &ServerConfig {
+        return &self.sever_config
     }
 }
