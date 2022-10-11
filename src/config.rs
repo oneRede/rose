@@ -22,7 +22,6 @@ pub struct Config {
 #[derive(Deserialize, Debug)]
 pub struct ServerConfig {
     pub key_log: bool,
-    pub root: String,
     pub key: String,
     pub cert: String,
     pub stateless_retry: bool,
