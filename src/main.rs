@@ -1,14 +1,16 @@
+mod client;
 mod config;
 mod encrypt;
 mod server;
-mod client;
+mod utils;
+mod peer;
 
 use crate::config::Config;
 use crate::encrypt::{decrypt, encrypt};
 
 fn main() {
     let message = "Hello World!";
-    
+
     let config = Config::new();
     let encrypt_info = config.get_encrypt_info();
     let key: [u8; 32] = encrypt_info.key;

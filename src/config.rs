@@ -13,14 +13,15 @@ pub struct EncryptInfo {
 #[derive(Deserialize, Debug)]
 pub struct Config {
     pub encrypt_info: EncryptInfo,
-    pub sever_config: ServerConfig,
+    pub server_config: ServerConfig,
     pub client_config: ClientConfig,
+    pub peer_storage: PeerStorage,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct ServerConfig {
     pub key_log: bool,
-    pub key: String,
+    pub ky: String,
     pub cert: String,
     pub stateless_retry: bool,
     pub listen: String,
@@ -33,6 +34,11 @@ pub struct ClientConfig {
     pub port: u32,
     pub cert: String,
     pub rebind: bool,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct PeerStorage {
+    pub path: String
 }
 
 impl Config {
@@ -56,10 +62,14 @@ impl Config {
     }
 
     pub fn get_server_config(&self) -> &ServerConfig {
-        return &self.sever_config;
+        return &self.server_config;
     }
 
     pub fn get_client_config(&self) -> &ClientConfig {
         return &self.client_config
+    }
+
+    pub fn get_peer_storage(&self) -> &PeerStorage {
+        return &self.peer_storage
     }
 }

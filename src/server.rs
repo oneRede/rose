@@ -18,7 +18,7 @@ impl<'a> Server<'a> {
 
     fn run(&self) -> Result<()> {
         let (cert, key) = match fs::read(&self.server_config.cert)
-            .and_then(|x| Ok((x, fs::read(&self.server_config.key)?)))
+            .and_then(|x| Ok((x, fs::read(&self.server_config.ky)?)))
         {
             Ok(x) => x,
             Err(e) => {
