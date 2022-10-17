@@ -34,6 +34,7 @@ impl Cmd {
         self.to_string().into_bytes()
     }
 }
+
 #[derive(Default)]
 struct CmdParser {
     cmd: Cmd,
@@ -51,13 +52,19 @@ impl CmdParser {
         let command = String::from(str_command);
 
         let str_hostnames: &str = str_split.get(1).unwrap().as_ref();
-        let hostnames: Vec<String> = str_hostnames.split(",").map(|hostname| String::from(hostname)).collect();
+        let hostnames: Vec<String> = str_hostnames
+            .split(",")
+            .map(|hostname| String::from(hostname))
+            .collect();
 
         let str_args: &str = str_split.get(2).unwrap().as_ref();
-        let args: Vec<String> = str_args.split(",").map(|hostname| String::from(hostname)).collect();
+        let args: Vec<String> = str_args
+            .split(",")
+            .map(|hostname| String::from(hostname))
+            .collect();
 
         let opt_args = Vec::<(String, String)>::default();
         let cmd = Cmd::new(command, opt_args, args);
-        Self { cmd, hostnames}
+        Self { cmd, hostnames }
     }
 }
