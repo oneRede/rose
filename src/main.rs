@@ -4,9 +4,11 @@ mod encrypt;
 mod server;
 mod utils;
 mod peer;
+mod cmd;
 
 use crate::config::Config;
 use crate::encrypt::{decrypt, encrypt};
+use crate::cmd::Cmd;
 
 fn main() {
     let message = "Hello World!";
