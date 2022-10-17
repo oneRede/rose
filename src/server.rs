@@ -44,7 +44,8 @@ impl<'a> Server<'a> {
             qsg.use_retry(true);
         }
 
-        let (endpoint, mut incoming) = quinn::Endpoint::server(qsg, self.server_config.listen.parse().unwrap())?;
+        let (endpoint, mut incoming) =
+            quinn::Endpoint::server(qsg, self.server_config.listen.parse().unwrap())?;
         Ok(())
     }
 }
